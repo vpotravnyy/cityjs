@@ -65,6 +65,34 @@ define (require, exports, module) ->
 					then 'AUTO_PUBLISH'
 					else 'MODERATE TOUTS'
 
+		_states = [
+			{
+				"id": "0"
+				"name": "Kiyvs'ka oblast"
+				"owner_id": "123"
+			}
+			{
+				"id": "1"
+				"name": "Odess'ka oblast"
+				"owner_id": "253"
+			}
+			{
+				"id": "2"
+				"name": "Lviv'ka oblast"
+				"owner_id": "12"
+			}
+		]
+
+		_getStates = (xhr) ->
+			response = _buildResponse JSON.stringify _states
+			return xhr.respond.apply xhr, response
+
+		_getState = (xhr, id) ->
+			for state in states when state.id == id
+				response = _buildResponse JSON.stringify state
+				return xhr.respond.apply xhr, response
+
+
 		requests = [
 			{
 				method: 'GET'
@@ -80,6 +108,18 @@ define (require, exports, module) ->
 				method: 'GET'
 				route: /\/organization\/user\/(\d+)/
 				response: _getUser
+			}
+
+			# package conf-map need this
+			{
+				method: 'GET'
+				route: /\/state/
+				response: _getStates
+			}
+			{
+				method: 'GET'
+				route: /\/state\/(\d+)/
+				response: _getState
 			}
 		]
 

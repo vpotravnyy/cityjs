@@ -2,6 +2,7 @@ define (require, exports, module) ->
 	
 	# Packages loading	
 	demoPackage = require 'packages/demo'
+	confMapPackage = require 'packages/conf-map'
 	
 	#Utils and other
 	Utils = require 'shared/utils'
@@ -17,6 +18,7 @@ define (require, exports, module) ->
 		initialize: ->
 			Utils.bindRoutes @, [
 				demoPackage.Controller
+        confMapPackage.Controller
 			]
 
 		unknownRoute: ->
